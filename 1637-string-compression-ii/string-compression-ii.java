@@ -10,16 +10,16 @@ class Solution {
         for (int[] row: dp) {
             Arrays.fill(row, -1);
         }
-        return dp1(0, k);
+        return dp(0, k);
     }
     
-    private int dp1(int i, int k) {
+    private int dp(int i, int k) {
         if (k < 0) return n;
         if (n <= i + k) return 0;
         
         int ans = dp[i][k];
         if (ans != -1) return ans; 
-        ans = dp1(i + 1, k - 1);
+        ans = dp(i + 1, k - 1);
         int length = 0, same = 0, diff = 0;
         
         for (int j=i; j < n && diff <= k; j++) {
@@ -30,7 +30,7 @@ class Solution {
             } else {
                 diff++; 
             }
-            ans = Math.min(ans, length + dp1(j + 1, k - diff)); 
+            ans = Math.min(ans, length + dp(j + 1, k - diff)); 
         }
         dp[i][k] = ans;
         return ans;
